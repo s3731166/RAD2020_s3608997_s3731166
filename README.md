@@ -76,4 +76,4 @@ User: (String Name, img Icon, Password Password, Phone phonenumber)
 
 News Item: (int ID; TimeDate: TimeStamp, String Category, String Contributor, Img Contributer_Avatar, Int Views, int commentCount, Comment[] comments )
 
-
+Commment: (int it , String body, int poster_ID)
