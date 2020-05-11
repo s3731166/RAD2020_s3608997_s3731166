@@ -1,0 +1,77 @@
+<%= render 'navigation' %>
+
+<h1>News+ Forum</h1>
+
+
+<div id="postsDiv">
+  <div id="wrapper">
+    <table>
+      <tbody>
+        <% @posts.each do |post| %>
+            <%= link_to post do %>
+                <h3><%= post.name %></h3>
+                <p> <%= post.author %>. Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago</p>
+                <% end %>
+              <hr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div id="sideBar">
+  <div class="sideItem">
+        <div>Users</div>
+
+    <table>
+      <tbody>
+        <% @users.each do |user| %>
+          <%= link_to user do %>
+            <h3><%= user.username %></h3>
+            <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+          <% end %>
+          <hr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="sideItem">
+      <div>Topics</div>
+    <table>
+      <tbody>
+        <% @topics.each do |topic| %>
+          <%= link_to topic do %>
+            <h3><%= topic.topicName %></h3>
+          <% end %>
+          <hr>
+        <% end %>
+
+      </tbody>
+      <%= link_to "Add A Topic", new_topic_path %>
+
+    </table>
+  </div>
+
+  <div class="sideItem">
+    <div>LINKS</div>
+
+    <table>
+      <tbody>
+        <tr>
+          <a href="https://rubyonrails.org/">RAILS</a>
+        </tr>
+          <hr>
+        <tr>
+          <a href="https://www.rmit.edu.au/">RMIT</a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<%= render 'footer' %>
+
+
