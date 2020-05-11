@@ -10323,3 +10323,38 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 20ms (Views: 18.6ms | ActiveRecord: 0.0ms | Allocations: 7470)
 
 
+Started GET "/login" for ::1 at 2020-05-11 15:33:30 +1000
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.2ms | Allocations: 318)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 25.4ms | ActiveRecord: 0.0ms | Allocations: 4786)
+
+
+Started POST "/sessions" for ::1 at 2020-05-11 15:33:32 +1000
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"SjmYafqnHmH+V7CgW8qZoy0TI68m4J9rngeFbNP4QGaCuWXOsBUxLiwqxus2xN11wKtqBKtCfxEsmsS6mW7Yug==", "username"=>"jessiah", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jessiah"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 229ms (ActiveRecord: 0.6ms | Allocations: 1148)
+
+
+Started GET "/" for ::1 at 2020-05-11 15:33:32 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 64)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:29
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:44
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 8.2ms | Allocations: 3570)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.5ms | Allocations: 8609)
+
+
