@@ -37,6 +37,8 @@ gem 'carrierwave', '~> 2.1'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 # font-awesome-rails provides the Font-Awesome web fonts and stylesheets as a Rails engine for use with the asset pipeline
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+#A Ruby wrapper for Gravatar URLs
+gem 'gravtastic', '~> 3.2', '>= 3.2.6'
 
 
 
