@@ -10358,3 +10358,141 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.5ms | Allocations: 8609)
 
 
+Started GET "/" for ::1 at 2020-05-18 14:09:17 +1000
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 1.0ms | Allocations: 536)
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:29
+  [1m[36mTopic Load (0.4ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:44
+  Rendered home/_footer.html.erb (Duration: 0.3ms | Allocations: 77)
+  Rendered home/index.html.erb within layouts/application (Duration: 41.1ms | Allocations: 13269)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 93ms (Views: 70.3ms | ActiveRecord: 3.8ms | Allocations: 29422)
+
+
+Started GET "/logout" for ::1 at 2020-05-18 14:09:20 +1000
+Processing by SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+Redirected to http://localhost:3000/
+Completed 302 Found in 13ms (ActiveRecord: 0.3ms | Allocations: 930)
+
+
+Started GET "/" for ::1 at 2020-05-18 14:09:20 +1000
+Processing by HomeController#index as HTML
+Redirected to http://localhost:3000/signup
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 335)
+
+
+Started GET "/signup" for ::1 at 2020-05-18 14:09:20 +1000
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 5.3ms | Allocations: 2063)
+  Rendered users/new.html.erb within layouts/application (Duration: 6.2ms | Allocations: 2399)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 14.6ms | ActiveRecord: 0.0ms | Allocations: 7576)
+
+
+Started GET "/login" for ::1 at 2020-05-18 14:09:21 +1000
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 559)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.0ms | Allocations: 5577)
+
+
+Started POST "/sessions" for ::1 at 2020-05-18 14:09:22 +1000
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"CrUpTVemVzYPRIxHyNa+3qi+QK1AvBrH7ixXaj0eXUNJoSjXo3aA6BvlkYF98NPpJvbZ95rV2GzZTShT8pWxRA==", "username"=>"jessiah", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jessiah"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 214ms (ActiveRecord: 0.2ms | Allocations: 1133)
+
+
+Started GET "/" for ::1 at 2020-05-18 14:09:23 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.1ms | Allocations: 64)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:29
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:44
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 5.8ms | Allocations: 3607)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 13.1ms | ActiveRecord: 0.6ms | Allocations: 8630)
+
+
+Started GET "/logout" for ::1 at 2020-05-18 14:09:32 +1000
+Processing by SessionsController#destroy as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 853)
+
+
+Started GET "/" for ::1 at 2020-05-18 14:09:32 +1000
+Processing by HomeController#index as HTML
+Redirected to http://localhost:3000/signup
+Filter chain halted as :authenticate_user! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 306)
+
+
+Started GET "/signup" for ::1 at 2020-05-18 14:09:32 +1000
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 1.6ms | Allocations: 1067)
+  Rendered users/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 1151)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.0ms | Allocations: 5630)
+
+
+Started GET "/login" for ::1 at 2020-05-18 14:09:36 +1000
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 309)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 9.1ms | ActiveRecord: 0.0ms | Allocations: 4765)
+
+
+Started POST "/sessions" for ::1 at 2020-05-18 14:09:37 +1000
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"exv8UTUUGi02jzH8T9Vf97PEoivFELKrTsUzYeIx7cU4D/3LwcTN8yIuLDr68zLAPYw7cR95cAB5pExYLboBwg==", "username"=>"jessiah", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "jessiah"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 214ms (ActiveRecord: 0.3ms | Allocations: 939)
+
+
+Started GET "/" for ::1 at 2020-05-18 14:09:38 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.1ms | Allocations: 58)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:29
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:44
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 6.1ms | Allocations: 3596)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.5ms | Allocations: 8650)
+
+
