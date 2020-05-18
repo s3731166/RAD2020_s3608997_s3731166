@@ -13,6 +13,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @posts = Post.all.order('created_at desc')
+    @post.viewCount = @post.viewCount + 1
+    @post.save 
+    #increments ViewCount
   end
 
   # GET /posts/new
@@ -28,6 +31,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.author = @current_user.username
+
 
     respond_to do |format|
       if @post.save

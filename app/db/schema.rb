@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_070526) do
+ActiveRecord::Schema.define(version: 2020_05_18_044634) do
 
   create_table "posts", force: :cascade do |t|
     t.string "name"
     t.text "body"
-    t.integer "commentCount"
-    t.integer "viewCount"
+    t.integer "commentCount", default: 0
+    t.integer "viewCount", default: 0
     t.string "author"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
