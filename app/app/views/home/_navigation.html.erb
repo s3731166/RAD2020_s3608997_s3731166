@@ -2,4 +2,8 @@
     <p> this is our nav bar</p>
     <%= link_to "Create A Post", new_post_path %>
     <%= link_to "Log Out", logout_path %>
+    <% if current_user %>
+        <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
+    <% end %>
+
 <hr>

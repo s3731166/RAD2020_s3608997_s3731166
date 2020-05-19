@@ -32,6 +32,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author = @current_user.username
+    @post.user = @current_user
 
 
     respond_to do |format|
@@ -78,7 +79,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :body, :commentCount, :viewCount, :author)
+      params.require(:post).permit(:name, :body, :topic_id, :commentCount,  :viewCount, :author)
     end
      def current_user
       if session[:user_id]

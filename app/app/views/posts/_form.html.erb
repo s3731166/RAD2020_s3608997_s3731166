@@ -22,7 +22,14 @@
   </div> 
   
   <%# here we we will have a select box or the categories %>
-  
+  <div class="field">
+      <%= form.label :topic %>
+
+      <%= form.collection_select :topic_id, Topic.all, :id, :topicName, class: 'form-control' %>
+
+  </div> 
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
