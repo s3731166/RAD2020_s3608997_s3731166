@@ -22032,3 +22032,1701 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 1.0ms | Allocations: 10658)
 
 
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-05-19 17:23:16 +1000
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.9ms | Allocations: 298)
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.5ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  Rendered home/_footer.html.erb (Duration: 0.4ms | Allocations: 75)
+  Rendered home/index.html.erb within layouts/application (Duration: 22.7ms | Allocations: 13850)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 52ms (Views: 32.1ms | ActiveRecord: 2.1ms | Allocations: 26142)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:23:28 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1801)
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.2ms | Allocations: 3554)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= render 'navigation' %>
+
+<h1>News+ Forum</h1>
+
+
+<div id="postsDiv">
+  <div id="wrapper">
+    <table>
+      <tbody>
+        <% @posts.each do |post| %>
+            <%= link_to post do %>
+                <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+
+                <h3><%= post.name %></h3>
+                <h3><%= Topic.all.find(post.topic_id).topicName %></h3> 
+
+                <p> <%= post.author %>. Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago</p>
+                <% end %>
+              <hr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div id="sideBar">
+  <div class="sideItem">
+        <div>Users</div>
+
+    <table>
+      <tbody>
+        <% @users.each do |user| %>
+          <%= link_to user do %>
+            <h3><%= user.username %></h3>
+            <%= image_tag  user.gravatar_url, :class => "gravatar" %>
+
+            <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+          <% end %>
+          <hr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="sideItem">
+      <div>Topics</div>
+    <table>
+      <tbody>
+        <% @topics.each do |topic| %>
+          <%= link_to topic do %>
+            <h3><%= topic.topicName %></h3>
+          <% end %>
+          <hr>
+        <% end %>
+
+      </tbody>
+      <%= link_to "Add A Topic", new_topic_path %>
+
+    </table>
+  </div>
+
+    <div class="sideItem">
+      <% <% @users.each.ordered(viewCount asc) for 10 do |user| %> %>
+
+  </div>
+
+
+
+
+
+
+  <div class="sideItem">
+    <div>LINKS</div>
+
+    <table>
+      <tbody>
+        <tr>
+          <a href="https://rubyonrails.org/">RAILS</a>
+        </tr>
+          <hr>
+        <tr>
+          <a href="https://www.rmit.edu.au/">RMIT</a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<%= render 'footer' %>
+
+
+
+):
+1:    <%= render 'navigation' %>
+2:    
+3:    <h1>News+ Forum</h1>
+4:    
+5:    
+6:    <div id="postsDiv">
+7:      <div id="wrapper">
+8:        <table>
+9:          <tbody>
+10:            <% @posts.each do |post| %>
+11:                <%= link_to post do %>
+12:                    <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+13:    
+14:                    <h3><%= post.name %></h3>
+15:                    <h3><%= Topic.all.find(post.topic_id).topicName %></h3> 
+16:    
+17:                    <p> <%= post.author %>. Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago</p>
+18:                    <% end %>
+19:                  <hr>
+20:            <% end %>
+21:          </tbody>
+22:        </table>
+23:      </div>
+24:    </div>
+25:    
+26:    
+27:    <div id="sideBar">
+28:      <div class="sideItem">
+29:            <div>Users</div>
+30:    
+31:        <table>
+32:          <tbody>
+33:            <% @users.each do |user| %>
+34:              <%= link_to user do %>
+35:                <h3><%= user.username %></h3>
+36:                <%= image_tag  user.gravatar_url, :class => "gravatar" %>
+37:    
+38:                <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+39:              <% end %>
+40:              <hr>
+41:            <% end %>
+42:          </tbody>
+43:        </table>
+44:    
+45:      </div>
+46:      <div class="sideItem">
+47:          <div>Topics</div>
+48:        <table>
+49:          <tbody>
+50:            <% @topics.each do |topic| %>
+51:              <%= link_to topic do %>
+52:                <h3><%= topic.topicName %></h3>
+53:              <% end %>
+54:              <hr>
+55:            <% end %>
+56:    
+57:          </tbody>
+58:          <%= link_to "Add A Topic", new_topic_path %>
+59:    
+60:        </table>
+61:      </div>
+62:    
+63:        <div class="sideItem">
+64:          <% <% @users.each.ordered(viewCount asc) for 10 do |user| %> %>
+65:    
+66:      </div>
+67:    
+68:    
+69:    
+70:    
+71:    
+72:    
+73:      <div class="sideItem">
+74:        <div>LINKS</div>
+75:    
+76:        <table>
+77:          <tbody>
+78:            <tr>
+79:              <a href="https://rubyonrails.org/">RAILS</a>
+80:            </tr>
+81:              <hr>
+82:            <tr>
+83:              <a href="https://www.rmit.edu.au/">RMIT</a>
+84:            </tr>
+85:          </tbody>
+86:        </table>
+87:      </div>
+88:    
+89:    </div>
+90:    
+91:    <%= render 'footer' %>
+  
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected '<', expecting `end'
+app/views/home/index.html.erb:64: syntax error, unexpected local variable or method, expecting `end'
+Started GET "/" for ::1 at 2020-05-19 17:23:42 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.9ms | Allocations: 296)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  Rendered home/_footer.html.erb (Duration: 0.2ms | Allocations: 77)
+  Rendered home/index.html.erb within layouts/application (Duration: 11.4ms | Allocations: 6871)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 23ms (Views: 20.2ms | ActiveRecord: 0.9ms | Allocations: 12903)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:26:48 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 1.7ms | Allocations: 287)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  Rendered home/index.html.erb within layouts/application (Duration: 5.8ms | Allocations: 3562)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.2ms | Allocations: 5315)
+
+
+  
+ActionView::Template::Error (undefined method `ordered' for #<Enumerator:0x00007f88bf3fae40>):
+     7:   <div id="wrapper">
+     8:     <table>
+     9:       <tbody>
+    10:         <% @posts.each.ordered('created_at asc' ) do |post| %>
+    11:             <%= link_to post do %>
+    12:                 <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+    13: 
+  
+app/views/home/index.html.erb:10
+Started GET "/" for ::1 at 2020-05-19 17:26:58 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.5ms | Allocations: 287)
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/home/index.html.erb:10
+  Rendered home/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 3547)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.3ms | Allocations: 5296)
+
+
+  
+ActionView::Template::Error (undefined method `order' for #<Enumerator:0x00007f88bd582120>):
+     7:   <div id="wrapper">
+     8:     <table>
+     9:       <tbody>
+    10:         <% @posts.each.order('created_at asc' ) do |post| %>
+    11:             <%= link_to post do %>
+    12:                 <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+    13: 
+  
+app/views/home/index.html.erb:10
+Started GET "/" for ::1 at 2020-05-19 17:27:14 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.5ms | Allocations: 287)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at asc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  Rendered home/_footer.html.erb (Duration: 0.2ms | Allocations: 77)
+  Rendered home/index.html.erb within layouts/application (Duration: 10.8ms | Allocations: 6860)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 21.2ms | ActiveRecord: 0.8ms | Allocations: 12822)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:27:17 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 129)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at asc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 17.7ms | Allocations: 5723)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 23.0ms | ActiveRecord: 1.1ms | Allocations: 10751)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:27:24 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.5ms | Allocations: 287)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  Rendered home/_footer.html.erb (Duration: 0.4ms | Allocations: 75)
+  Rendered home/index.html.erb within layouts/application (Duration: 11.4ms | Allocations: 6856)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 21ms (Views: 18.2ms | ActiveRecord: 0.9ms | Allocations: 12782)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:33:55 +1000
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.9ms | Allocations: 287)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc[0m
+  ↳ app/views/home/index.html.erb:64:in `each_with_index'
+  Rendered home/_footer.html.erb (Duration: 0.7ms | Allocations: 75)
+  Rendered home/index.html.erb within layouts/application (Duration: 12.4ms | Allocations: 7586)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 23ms (Views: 20.7ms | ActiveRecord: 1.1ms | Allocations: 13567)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:37:20 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.9ms | Allocations: 287)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.2ms | Allocations: 75)
+  Rendered home/index.html.erb within layouts/application (Duration: 11.4ms | Allocations: 7698)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 22.0ms | ActiveRecord: 1.1ms | Allocations: 13610)
+
+
+Started GET "/posts/2" for ::1 at 2020-05-19 17:37:24 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "RAD POST"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "TESTING AR"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 4], ["updated_at", "2020-05-19 07:37:24.395106"], ["id", 2]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 426)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 9.9ms | ActiveRecord: 1.6ms | Allocations: 14572)
+
+
+Started GET "/posts/2" for ::1 at 2020-05-19 17:37:27 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "RAD POST"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "TESTING AR"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 5], ["updated_at", "2020-05-19 07:37:27.950016"], ["id", 2]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 44ms (Views: 21.8ms | ActiveRecord: 1.9ms | Allocations: 17094)
+
+
+Started GET "/posts/new" for ::1 at 2020-05-19 17:37:41 +1000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  Rendering posts/new.html.erb within layouts/application
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/posts/_form.html.erb:28
+  Rendered posts/_form.html.erb (Duration: 3.7ms | Allocations: 2006)
+  Rendered posts/new.html.erb within layouts/application (Duration: 4.7ms | Allocations: 2337)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 10.4ms | ActiveRecord: 0.4ms | Allocations: 7506)
+
+
+Started POST "/posts" for ::1 at 2020-05-19 17:37:45 +1000
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"UEr67RzGonfhLr7XggRdqbU7iY4O5eaCFHFxijv5yMffpA0RQ8HxjK5u0AJ+kesmLHsocqi0uLLQlWQoB2qdNg==", "post"=>{"name"=>"This is our First News Item Post", "body"=>"ethnibp", "topic_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? LIMIT ?[0m  [["body", "ethnibp"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Create (0.4ms)[0m  [1m[32mINSERT INTO "posts" ("name", "body", "author", "created_at", "updated_at", "user_id", "topic_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "This is our First News Item Post"], ["body", "ethnibp"], ["author", "RAD"], ["created_at", "2020-05-19 07:37:45.083290"], ["updated_at", "2020-05-19 07:37:45.083290"], ["user_id", 2], ["topic_id", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 17ms (ActiveRecord: 1.8ms | Allocations: 6450)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:37:45 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 129)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 31.9ms | Allocations: 8057)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 41ms (Views: 37.6ms | ActiveRecord: 1.3ms | Allocations: 13093)
+
+
+Started GET "/posts/new" for ::1 at 2020-05-19 17:37:46 +1000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  Rendering posts/new.html.erb within layouts/application
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/posts/_form.html.erb:28
+  Rendered posts/_form.html.erb (Duration: 2.7ms | Allocations: 1614)
+  Rendered posts/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1694)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.1ms | ActiveRecord: 0.3ms | Allocations: 6724)
+
+
+Started POST "/posts" for ::1 at 2020-05-19 17:37:49 +1000
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"BGtZJVG9iuR68tbk+EFS9Ypb0vl4pprn6dT6vHTtFWSLha7ZDrrZHzWyuDEE1OR6ExtzBd73xNctMO8eSH5AlQ==", "post"=>{"name"=>"apwotgjpv", "body"=>"spgv", "topic_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? LIMIT ?[0m  [["name", "apwotgjpv"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? LIMIT ?[0m  [["body", "spgv"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Create (0.5ms)[0m  [1m[32mINSERT INTO "posts" ("name", "body", "author", "created_at", "updated_at", "user_id", "topic_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "apwotgjpv"], ["body", "spgv"], ["author", "RAD"], ["created_at", "2020-05-19 07:37:49.235593"], ["updated_at", "2020-05-19 07:37:49.235593"], ["user_id", 2], ["topic_id", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 18ms (ActiveRecord: 1.9ms | Allocations: 6457)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:37:49 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 33.7ms | Allocations: 9615)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 41ms (Views: 38.3ms | ActiveRecord: 1.3ms | Allocations: 14678)
+
+
+Started GET "/posts/new" for ::1 at 2020-05-19 17:37:50 +1000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  Rendering posts/new.html.erb within layouts/application
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/posts/_form.html.erb:28
+  Rendered posts/_form.html.erb (Duration: 2.4ms | Allocations: 1614)
+  Rendered posts/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1694)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 8.1ms | ActiveRecord: 0.2ms | Allocations: 6698)
+
+
+Started POST "/posts" for ::1 at 2020-05-19 17:37:54 +1000
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"vqiJeasdowINdpNoEl3Kzm/3y/hBT/ji7N7J5/le1P8xRn6F9Brw+UI2/b3uyHxB9rdqBOceptIoOtxFxc2BDg==", "post"=>{"name"=>"wmngpsvm; mw", "body"=>"egwp ijpm ", "topic_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? LIMIT ?[0m  [["name", "wmngpsvm; mw"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? LIMIT ?[0m  [["body", "egwp ijpm "], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Create (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("name", "body", "author", "created_at", "updated_at", "user_id", "topic_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "wmngpsvm; mw"], ["body", "egwp ijpm "], ["author", "RAD"], ["created_at", "2020-05-19 07:37:54.196390"], ["updated_at", "2020-05-19 07:37:54.196390"], ["user_id", 2], ["topic_id", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 2.0ms | Allocations: 6442)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:37:54 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.1ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 26.5ms | Allocations: 11183)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 34ms (Views: 31.8ms | ActiveRecord: 1.3ms | Allocations: 16228)
+
+
+Started GET "/posts/new" for ::1 at 2020-05-19 17:38:00 +1000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  Rendering posts/new.html.erb within layouts/application
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/posts/_form.html.erb:28
+  Rendered posts/_form.html.erb (Duration: 3.1ms | Allocations: 1615)
+  Rendered posts/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1695)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.0ms | ActiveRecord: 0.4ms | Allocations: 6697)
+
+
+Started POST "/posts" for ::1 at 2020-05-19 17:38:03 +1000
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"1HYnRc1+G4q+prEPsVXKDIXwFgr8FPb/HUDEPAmvrqlbmNC5knlIcfHm39pNwHyDHLC39lpFqM/ZpNGeNTz7WA==", "post"=>{"name"=>"wprogmpv", "body"=>"pwmnf", "topic_id"=>"1"}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? LIMIT ?[0m  [["name", "wprogmpv"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? LIMIT ?[0m  [["body", "pwmnf"], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[36mPost Create (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("name", "body", "author", "created_at", "updated_at", "user_id", "topic_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "wprogmpv"], ["body", "pwmnf"], ["author", "RAD"], ["created_at", "2020-05-19 07:38:03.495449"], ["updated_at", "2020-05-19 07:38:03.495449"], ["user_id", 2], ["topic_id", 1]]
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:39:in `block in create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 2.3ms | Allocations: 6455)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:03 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 39.8ms | Allocations: 12698)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 48ms (Views: 45.3ms | ActiveRecord: 1.2ms | Allocations: 17738)
+
+
+Started GET "/posts/2" for ::1 at 2020-05-19 17:38:08 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "RAD POST"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "TESTING AR"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 6], ["updated_at", "2020-05-19 07:38:08.745906"], ["id", 2]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 140)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 44ms (Views: 6.7ms | ActiveRecord: 2.4ms | Allocations: 12144)
+
+
+Started GET "/posts/6" for ::1 at 2020-05-19 17:38:15 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "wprogmpv"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "pwmnf"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 1], ["updated_at", "2020-05-19 07:38:15.646363"], ["id", 6]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 33ms (Views: 8.9ms | ActiveRecord: 1.6ms | Allocations: 12083)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:17 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 37.0ms | Allocations: 12635)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 46ms (Views: 42.7ms | ActiveRecord: 1.8ms | Allocations: 17664)
+
+
+Started GET "/posts/5" for ::1 at 2020-05-19 17:38:24 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "wmngpsvm; mw"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "egwp ijpm "], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 1], ["updated_at", "2020-05-19 07:38:24.468592"], ["id", 5]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 47ms (Views: 7.5ms | ActiveRecord: 2.1ms | Allocations: 12115)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:25 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.4ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 44.6ms | Allocations: 12627)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 61ms (Views: 56.7ms | ActiveRecord: 1.7ms | Allocations: 17675)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:46 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 54.2ms | Allocations: 12668)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 71ms (Views: 66.2ms | ActiveRecord: 1.4ms | Allocations: 17677)
+
+
+Started GET "/posts/6" for ::1 at 2020-05-19 17:38:49 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "wprogmpv"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "pwmnf"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.4ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 2], ["updated_at", "2020-05-19 07:38:49.746221"], ["id", 6]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 44ms (Views: 7.5ms | ActiveRecord: 2.1ms | Allocations: 12111)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:51 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 40.2ms | Allocations: 12670)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 49ms (Views: 46.0ms | ActiveRecord: 1.5ms | Allocations: 17696)
+
+
+Started GET "/posts/5" for ::1 at 2020-05-19 17:38:53 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "wmngpsvm; mw"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "egwp ijpm "], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 2], ["updated_at", "2020-05-19 07:38:53.794544"], ["id", 5]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 47ms (Views: 7.1ms | ActiveRecord: 1.9ms | Allocations: 12106)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:38:55 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 29.2ms | Allocations: 12670)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 38ms (Views: 34.2ms | ActiveRecord: 1.4ms | Allocations: 17702)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:01 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.9ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 1], ["updated_at", "2020-05-19 07:39:01.407229"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 18ms (Views: 6.1ms | ActiveRecord: 2.1ms | Allocations: 12089)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:04 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 50.8ms | Allocations: 12667)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 62ms (Views: 58.5ms | ActiveRecord: 1.8ms | Allocations: 17700)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:05 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 2], ["updated_at", "2020-05-19 07:39:05.559944"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 18ms (Views: 6.3ms | ActiveRecord: 1.8ms | Allocations: 12090)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:06 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 36.6ms | Allocations: 12667)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 42.0ms | ActiveRecord: 1.5ms | Allocations: 17695)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:07 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 3], ["updated_at", "2020-05-19 07:39:07.946061"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 47ms (Views: 8.5ms | ActiveRecord: 2.1ms | Allocations: 12093)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:08 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 31.0ms | Allocations: 12667)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 40ms (Views: 37.2ms | ActiveRecord: 1.4ms | Allocations: 17697)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:09 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (1.4ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 4], ["updated_at", "2020-05-19 07:39:09.649781"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.0ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 11.7ms | ActiveRecord: 2.9ms | Allocations: 12083)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:11 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.6ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 55.1ms | Allocations: 12667)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 63ms (Views: 60.3ms | ActiveRecord: 1.4ms | Allocations: 17707)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:17 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.3ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 5], ["updated_at", "2020-05-19 07:39:17.145966"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 20ms (Views: 7.7ms | ActiveRecord: 1.9ms | Allocations: 12107)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:18 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.2ms | Allocations: 122)
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 42.4ms | Allocations: 12678)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 52ms (Views: 48.1ms | ActiveRecord: 1.6ms | Allocations: 17707)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:20 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.4ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 6], ["updated_at", "2020-05-19 07:39:20.446627"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 50ms (Views: 9.7ms | ActiveRecord: 2.2ms | Allocations: 12117)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:21 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.4ms | Allocations: 122)
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 36.3ms | Allocations: 12686)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 41.0ms | ActiveRecord: 1.5ms | Allocations: 17710)
+
+
+Started GET "/posts/3" for ::1 at 2020-05-19 17:39:25 +1000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "This is our First News Item Post"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "ethnibp"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.1ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.4ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 7], ["updated_at", "2020-05-19 07:39:25.796595"], ["id", 3]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 134)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 49ms (Views: 8.3ms | ActiveRecord: 2.0ms | Allocations: 12105)
+
+
+Started GET "/" for ::1 at 2020-05-19 17:39:27 +1000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/_navigation.html.erb (Duration: 0.3ms | Allocations: 122)
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/home/index.html.erb:10
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:12
+  [1m[36mCACHE Topic Load (0.0ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/index.html.erb:15
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/home/index.html.erb:33
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/home/index.html.erb:50
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY viewCount desc LIMIT ?[0m  [["LIMIT", 5]]
+  ↳ app/views/home/index.html.erb:66
+  Rendered home/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 56.6ms | Allocations: 12698)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 65ms (Views: 61.2ms | ActiveRecord: 1.9ms | Allocations: 17730)
+
+
+Started GET "/posts/6" for ::1 at 2020-05-19 17:53:24 +1000
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."name" = ? AND "posts"."id" != ? LIMIT ?[0m  [["name", "wprogmpv"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."body" = ? AND "posts"."id" != ? LIMIT ?[0m  [["body", "pwmnf"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics" WHERE "topics"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[36mPost Update (0.5ms)[0m  [1m[33mUPDATE "posts" SET "viewCount" = ?, "updated_at" = ? WHERE "posts"."id" = ?[0m  [["viewCount", 3], ["updated_at", "2020-05-19 07:53:24.120493"], ["id", 6]]
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:17:in `show'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.8ms | Allocations: 415)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 43ms (Views: 21.4ms | ActiveRecord: 2.6ms | Allocations: 13372)
+
+
+Started GET "/posts/6/edit" for ::1 at 2020-05-19 17:53:26 +1000
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:77:in `set_post'
+  Rendering posts/edit.html.erb within layouts/application
+  [1m[36mTopic Load (0.2ms)[0m  [1m[34mSELECT "topics".* FROM "topics"[0m
+  ↳ app/views/posts/_form.html.erb:28
+  Rendered posts/_form.html.erb (Duration: 4.6ms | Allocations: 2064)
+  Rendered posts/edit.html.erb within layouts/application (Duration: 5.9ms | Allocations: 2442)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 12.5ms | ActiveRecord: 0.6ms | Allocations: 8080)
+
+
+Started GET "/posts" for ::1 at 2020-05-19 17:53:29 +1000
+Processing by PostsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:86:in `current_user'
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at desc[0m
+  ↳ app/views/posts/index.html.erb:18
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1791)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 19ms (Views: 15.3ms | ActiveRecord: 0.4ms | Allocations: 6962)
+
+

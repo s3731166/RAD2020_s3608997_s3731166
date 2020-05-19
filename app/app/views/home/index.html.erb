@@ -7,7 +7,7 @@
   <div id="wrapper">
     <table>
       <tbody>
-        <% @posts.each do |post| %>
+        <% @posts.order('created_at desc').each do |post| %>
             <%= link_to post do %>
                 <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
 
@@ -43,12 +43,15 @@
     </table>
 
   </div>
+
+
   <div class="sideItem">
       <div>Topics</div>
     <table>
       <tbody>
         <% @topics.each do |topic| %>
           <%= link_to topic do %>
+
             <h3><%= topic.topicName %></h3>
           <% end %>
           <hr>
@@ -61,10 +64,13 @@
   </div>
 
     <div class="sideItem">
-    <%# for i in 10, ordered by viewcount, draw post %>
-            <%# <% @users.each.ordered(viewCount asc) for 10 do |user| %> %>
-
-  </div>
+    <% @posts = Post.order('viewCount desc').limit(5)%>
+      <% @posts.each do | post| %> 
+            <%= link_to post do %>
+              <h3><%= post.name %></h3>
+            <% end %>
+      <% end %>
+   </div>
 
 
   <div class="sideItem">
