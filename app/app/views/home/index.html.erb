@@ -34,7 +34,6 @@
           <%= link_to user do %>
             <h3><%= user.username %></h3>
             <%= image_tag  user.gravatar_url, :class => "gravatar" %>
-
             <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
           <% end %>
           <hr>
@@ -91,6 +90,6 @@
 
 </div>
 
-<%= render 'footer' %>
 
 
+    <%= render 'footer' %>

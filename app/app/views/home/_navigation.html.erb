@@ -3,7 +3,9 @@
     <%= link_to "Create A Post", new_post_path %>
     <%= link_to "Log Out", logout_path %>
     <% if current_user %>
+    <%=link_to current_user do%>
         <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
+        <% end %>
     <% end %>
 
 <hr>
