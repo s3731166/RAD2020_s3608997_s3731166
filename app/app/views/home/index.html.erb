@@ -23,6 +23,32 @@
   </div>
 </div>
 
+<div id="selectedPostsDiv">
+
+   <div id="wrapper">
+    <table>
+    <thead> SELECTED POSTS </thead>
+      <tbody>
+      <% @posts = Post.where(:topic => 1).order('created_at asc')  %>
+        <% @posts.each do |post| %>
+            <%= link_to post do %>
+                <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+
+                <h3><%= post.name %></h3>
+                <h3><%= Topic.all.find(post.topic_id).topicName %></h3> 
+
+                <p> <%= post.author %>. Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago</p>
+                <% end %>
+              <hr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
 
 <div id="sideBar">
   <div class="sideItem">

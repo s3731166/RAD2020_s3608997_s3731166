@@ -4,7 +4,5 @@ skip_before_action :authenticate_user!, only: [:index]
     @posts = Post.all
     @users = User.all 
     @topics = Topic.all  
-
-
   end
 end
