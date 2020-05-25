@@ -3,12 +3,11 @@
 <h1>News+ Forum</h1>
 
 
-<div id="postsDiv">
-  <div id="wrapper">
-    <table>
-      <tbody>
-        <div class="post-card"> <%# Post - Card %>
+
           <% @posts.order('created_at desc').each do |post| %>
+           <div id="postsDiv">
+            <div id="wrapper">
+                  <div class="post-card"> <%# Post - Card %>
             <div class="card-icon">
               <%= link_to @users.find(post.user_id) do %>
                 <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
@@ -32,12 +31,12 @@
             </div>
               <%#END card-content  %>
               <hr>
-          <% end %>
+        
         </div><%#END Post Card %>
-      </tbody>
-    </table>
+    
   </div>
 </div>
+  <% end %>
 
 <div id="selectedPostsDiv">
 <%# THIS PART IS CURRENTLY HIDDEN!!! %>
