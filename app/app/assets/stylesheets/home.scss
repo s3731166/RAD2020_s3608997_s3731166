@@ -4,8 +4,9 @@ body {
   // display:inline-block;
   margin: 0;
   padding: 0;
-
+color: white;
 }
+
 
 .container{
   display: table;
@@ -18,7 +19,7 @@ body {
   float: left;
   // position: absolute;
   background-color: black;
-  width: 102%;
+  width: 95%;
   margin-bottom: 3em; 
   border-radius: 1em;
   color: white;
@@ -44,13 +45,13 @@ height: 2em;
 }
 
 .main-posts{
-  width: 70%;
+  width: 60%;
   display: table-cell; 
   text-align: left;
   float: left;
   margin: 3em;
   left: 0;
-  margin-bottom: 10em;
+  margin-bottom: 4em;
 
 }
 

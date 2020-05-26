@@ -7,6 +7,7 @@
       <table>
       <thead> SELECTED POSTS </thead>
         <tbody>
+        <%# THIS WILL TAKE PARAMS FROM BUTTONS NOT "1" %>
         <% @posts = Post.where(:topic => 1).order('created_at asc')  %>
           <% @posts.each do |post| %>
               <%= link_to post do %>
