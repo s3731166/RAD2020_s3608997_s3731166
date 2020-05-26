@@ -1,139 +1,118 @@
-<%= render 'navigation' %>
+<div class="contianer">
+  <div class="nav-div">
+    <%= render 'navigation' %>
+  </div>
 
-<h1>News+ Forum</h1>
+  <h1>NEWS+ FORUM</h1>
+    <div class="main-posts">
+      <% @posts.order('created_at desc').each do |post| %>
+        <div id="postsDiv">
+        <div id="wrapper">
+              <div class="post-card"> <%# Post - Card %>
+        <div class="card-icon">
+          <%= link_to @users.find(post.user_id) do %>
+            <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
+          <% end %>
+        </div><%# END card-icon %>
+        <div class="card-content">
 
-
-
-          <% @posts.order('created_at desc').each do |post| %>
-           <div id="postsDiv">
-            <div id="wrapper">
-                  <div class="post-card"> <%# Post - Card %>
-            <div class="card-icon">
-              <%= link_to @users.find(post.user_id) do %>
-                <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
-              <% end %>
-            </div><%# END card-icon %>
-            <div class="card-content">
-
-              <%= link_to post do %>
-                  <h3><%= post.name %></h3>
-              <% end %>
-              <div class="card-info">
-                <%= link_to @users.find(post.user_id) do %>
-                  <%= post.author %>   
-                <% end %>
-                Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago.
-                <%= @topics.find(post.topic_id).topicName %></h3> 
-              </div>
-              <div class="card-stats">
-                  Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. 
-              </div>
-            </div>
-              <%#END card-content  %>
-              <hr>
-        
-        </div><%#END Post Card %>
+          <%= link_to post do %>
+            <h3><%= post.name %></h3>
+          <% end %>
+          <div class="card-info">
+            <%= link_to @users.find(post.user_id) do %>
+              <%= post.author %>   
+            <% end %>
+            Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago.
+            <%= @topics.find(post.topic_id).topicName %></h3> 
+          </div>
+          <div class="card-stats">
+              Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. 
+          </div>
+        </div>
+          <%#END card-content  %>
+          <hr>
     
+    </div><%#END Post Card %>
+      
+    </div>
   </div>
-</div>
-  <% end %>
+    <% end %>
 
-<div id="selectedPostsDiv">
-<%# THIS PART IS CURRENTLY HIDDEN!!! %>
-<%# <%= render partial: 'posts', collection: @topics, locals: {count: 10} %> 
+    <%# ONCLICK DO %>
+      <%# <%render 'selected' params : {@selected_topics}%>
+    <%# <% end %> 
+   
 
-  <div id="wrapper">
-    <table>
-    <thead> SELECTED POSTS </thead>
-      <tbody>
-      <% @posts = Post.where(:topic => 1).order('created_at asc')  %>
-        <% @posts.each do |post| %>
-            <%= link_to post do %>
-                <%= image_tag @users.find(post.user_id).gravatar_url, :class => "gravatar" %>   
 
-                <h3><%= post.name %></h3>
-                <h3><%= Topic.all.find(post.topic_id).topicName %></h3> 
-
-                <p> <%= post.author %>. Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago</p>
-                <% end %>
-              <hr>
-        <% end %>
-      </tbody>
-    </table>
   </div>
-</div>
-<%# END HIDDEN %>
 
 
+  <div id="sideBar">
+    <div class="sideItem">
+          <div>Users</div>
 
-
-
-<div id="sideBar">
-  <div class="sideItem">
-        <div>Users</div>
-
-    <table>
-      <tbody>
-        <% @users.each do |user| %>
-          <%= link_to user do %>
-            <h3><%= user.username %></h3>
-            <%= image_tag  user.gravatar_url, :class => "gravatar" %>
-            <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+      <table>
+        <tbody>
+          <% @users.each do |user| %>
+            <%= link_to user do %>
+              <h3><%= user.username %></h3>
+              <%= image_tag  user.gravatar_url, :class => "gravatar" %>
+              <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+            <% end %>
+            <hr>
           <% end %>
-          <hr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
 
-  </div>
+    </div>
 
-
-  <div class="sideItem">
-      <div>Topics</div>
-    <table>
-      <tbody>
-        <% @topics.each do |topic| %>
-          <%= link_to topic do %>
-
-            <h3><%= topic.topicName %></h3>
-          <% end %>
-          <hr>
-        <% end %>
-
-      </tbody>
-      <%= link_to "Add A Topic", new_topic_path %>
-
-    </table>
-  </div>
 
     <div class="sideItem">
-    <% @posts = Post.order('viewCount desc').limit(5)%>
-      <% @posts.each do | post| %> 
-            <%= link_to post do %>
-              <h3><%= post.name %></h3>
+        <div>Topics</div>
+      <table>
+        <tbody>
+          <% @topics.each do |topic| %>
+            <%= link_to topic do %>
+
+              <h3><%= topic.topicName %></h3>
             <% end %>
-      <% end %>
-   </div>
+            <hr>
+          <% end %>
+
+        </tbody>
+        <%= link_to "Add A Topic", new_topic_path %>
+
+      </table>
+    </div>
+
+      <div class="sideItem">
+      <% @posts = Post.order('viewCount desc').limit(5)%>
+        <% @posts.each do | post| %> 
+              <%= link_to post do %>
+                <h3><%= post.name %></h3>
+              <% end %>
+        <% end %>
+    </div>
 
 
-  <div class="sideItem">
-    <div>LINKS</div>
+    <div class="sideItem">
+      <div>LINKS</div>
 
-    <table>
-      <tbody>
-        <tr>
-          <a href="https://rubyonrails.org/">RAILS</a>
-        </tr>
-          <hr>
-        <tr>
-          <a href="https://www.rmit.edu.au/">RMIT</a>
-        </tr>
-      </tbody>
-    </table>
+      <table>
+        <tbody>
+          <tr>
+            <a href="https://rubyonrails.org/">RAILS</a>
+          </tr>
+            <hr>
+          <tr>
+            <a href="https://www.rmit.edu.au/">RMIT</a>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
-
 </div>
 
-
-
-    <%= render 'footer' %>
+<%= render 'footer' %>

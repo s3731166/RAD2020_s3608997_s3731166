@@ -13,6 +13,20 @@
   <%= @user.email %>
 </p>
 
+<div>
+<% @posts =Post.where( :user_id => @user.id) %>
+  <% @posts.order('created_at desc').each do |post| %>
+
+    <%= link_to post do %>
+      <div class="post-summary">
+        <h3><%= post.name %></h3>
+        Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago.
+        Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. 
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
 
 
 
