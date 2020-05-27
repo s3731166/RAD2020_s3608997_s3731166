@@ -64,9 +64,23 @@
           <% end %>
         </tbody>
       </table>
-
     </div>
 
+<div id='selected-post-list'>
+  <% @posts.each do |post| %>
+        <div class="post">
+        <%post.name%>
+        </div>
+  <% end %> 
+</div>
+
+<div id='topicfilter'>
+    <h4> Topic Filter: </h4>
+    <% @topicfilter = Topic.all %>
+    <% @topicfilter.each do |c| %>
+        <br><input id="<%= c %>" type="checkbox" class="topic-select" checked><label for="<%= c %>"> <%= c.topicName %> </label>
+    <% end %>
+</div>
 
     <div class="sideItem">
         <div>Topics</div>

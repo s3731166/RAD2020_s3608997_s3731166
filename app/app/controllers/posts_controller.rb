@@ -4,13 +4,13 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show]
   # skip_before_action :authenticate_user!, only: [:show]
-
-
-
+  respond_to :html, :js
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all.order('created_at desc')
+    @selected_posts = Post.page(params[:page]).per(25).by_topic(params[:topics])
+
   end
 
   # GET /posts/1

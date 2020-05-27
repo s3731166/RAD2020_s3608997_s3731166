@@ -1,0 +1,10 @@
+<%# javascript for topic filter  %>
+
+var posts = $('#selected-post-list');
+posts.empty();
+
+<% @posts.each do |post|%>
+  posts.append("<div class='post'><%= post.name %></div>"); 
+  <%# // selected posts display goes here %>
+<% end %>
+
