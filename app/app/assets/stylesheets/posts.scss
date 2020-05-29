@@ -2,15 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 body{
-    text-align: left;
+   text-align: center;
+   
 }
 .post-backdrop{
-    text-align: left;
-    background-color: salmon;
+    // text-align: center;
+    background-color: #333;
     padding: 2em;
-    border-radius: 1em;
+    // border-radius: 1em;
     display: inline-block;
     width: 100%;
-    margin: 3em;
-
+    margin: 130%;
+    margin-left: 340%;
+    
+}
+// .center-wrapper{
+//     text-align: center;
+// }
+.field{
+    // width: 40%;
 }

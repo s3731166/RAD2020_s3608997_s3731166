@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show]
   # skip_before_action :authenticate_user!, only: [:show]
-  respond_to :html, :js
+  # respond_to :html, :js
   # GET /posts
   # GET /posts.json
   def index

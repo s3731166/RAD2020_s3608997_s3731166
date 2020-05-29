@@ -3,7 +3,6 @@
     <%= render 'navigation' %>
   </div>
 
-  <h1>NEWS+ FORUM</h1>
     <div class="main-posts">
       <% @posts.order('created_at desc').each do |post| %>
         <div id="postsDiv">
