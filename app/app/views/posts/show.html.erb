@@ -12,7 +12,12 @@
 
 <p>
   <strong>Comment Count:</strong>
-  <%= @post.commentCount %>
+    <%=  @post.comments.count %>
+    <hr>
+
+  <%= render @post.comments %>
+  <h3>Add a comment: </h3>
+  <%= render 'comments/form' %>
 </p>
 
 <p>
@@ -24,12 +29,6 @@
   <strong>Author:</strong>
   <%= @post.author %>
 </p>
-
-  <div class="comments-div">
-    <%= render @post.comments%>
-  </div>
-
-  <%= render 'comments/form', comment: @comment%>
 
 
 <%# only Poster Can Edit or Delete %>

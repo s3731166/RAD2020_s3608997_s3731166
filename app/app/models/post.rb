@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
     belongs_to :user
     belongs_to :topic
-    has_many :comments
+    has_many :comments, dependent: :destroy
     scope :by_topic, -> (topics) { where(:topic => (topics|| Course.uniq.pluck(:topic)) ) }
 
 

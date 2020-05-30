@@ -22,7 +22,7 @@
             <%= @topics.find(post.topic_id).topicName %></h3> 
           </div>
           <div class="card-stats">
-              Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. 
+              Views: <%= post.viewCount %> Comments: <%= post.comments.count %>. 
           </div>
         </div>
           <%#END card-content  %>

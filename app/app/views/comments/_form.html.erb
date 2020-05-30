@@ -1,11 +1,14 @@
-<%= form_with(model: comment, local: true) do |form| %>
- 
+<%= form_for([@post , @post.comments.build]) do |form| %>
   <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_field :comment %>
+         <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
-
-  <div class="actions">
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_field :body %>
+  </div>
+  <br>
+ <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

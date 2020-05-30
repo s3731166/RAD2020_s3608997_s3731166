@@ -1,7 +1,0 @@
-<div class="show-comment">
-    <%= @user = User.find(:user)%>
-    <%=@user.name %> 
-    <%= comment.comment%>
-    <hr>
-    <% link_to "Delete", [comment.post, comment], method: :delete , data: { confirm: "Delete Comment?"} %>
-</div>
