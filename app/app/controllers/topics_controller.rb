@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
   # GET /topics.json
   def index
     @topics = Topic.all
+    @posts = Post.all
   end
 
   # GET /topics/1

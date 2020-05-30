@@ -1,7 +1,5 @@
 <div class="contianer">
-  <div class="nav-div">
-    <%= render 'navigation' %>
-  </div>
+ 
 
     <div class="main-posts">
       <% @posts.order('created_at desc').each do |post| %>
@@ -128,4 +126,3 @@
   </div>
 </div>
 
-<%= render 'footer' %>
