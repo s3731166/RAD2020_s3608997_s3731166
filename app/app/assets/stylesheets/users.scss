@@ -11,6 +11,8 @@ body {
 }
 
 .boxRegister {
+    margin-left: 20%;
+    margin-top: 50%;
     display: inline-block;
     width: 500px;
     padding: 40px;
@@ -32,4 +34,13 @@ body {
     margin-bottom: 2em;
     text-align: center;
     // display: inline-block;
+}
+
+.show-user{
+background-color: #333;
+padding: 2em;
+//height: 50;
+//width: 50;
+margin-left: 20%;
+margin-top: 50%;
 }

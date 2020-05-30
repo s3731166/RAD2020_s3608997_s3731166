@@ -25,6 +25,13 @@
   <%= @post.author %>
 </p>
 
+  <div class="comments-div">
+    <%= render @post.comments%>
+  </div>
+
+  <%= render 'comments/form', comment: @comment%>
+
+
 <%# only Poster Can Edit or Delete %>
 <% if current_user %>
   <% if @post.author == current_user.username %>
