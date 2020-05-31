@@ -1,5 +1,11 @@
 <div class="main-posts">
 <%# <%= @posts = Post.where(:topic_id = @topicfilter)%> 
+<% if @tag_ids %>
+    <%posts.clear()%>
+    <% @tag_ids.each do |t|%>
+        <% @posts >> @posts.where(:topic_id => t)%> 
+   <% end %>
+<% end %>
     <% @posts.order('created_at desc').each do |post| %>
         <div id="postsDiv">
             <div id="wrapper">

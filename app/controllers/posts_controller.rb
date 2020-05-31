@@ -3,8 +3,20 @@ class PostsController < ApplicationController
   helper_method :current_user
 
   before_action :authenticate_user!, except: [:show]
-  # skip_before_action :authenticate_user!, only: [:show]
   # respond_to :html, :js
+
+
+
+def selected
+
+  params.each do |id|
+    @posts = Post.where(:post_id => id)
+  end
+  redirect_to root_path(@posts)
+
+end 
+
+
   # GET /posts
   # GET /posts.json
   def index

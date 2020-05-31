@@ -1,4 +1,5 @@
 <div id="sideBar">
+
     <div class="sideItem">
         <div>Users</div>
 
@@ -17,36 +18,20 @@
     </div>
 
     <div id='topicfilter'>
-        <h4> Topic Filter: </h4>
-        <% @topicfilter = Topic.all %>
-        <% @topicfilter.each do |c| %>
-            <br>
-            <input id="<%= c %>" type="checkbox" class="topic-select" checked><label for="<%= c %>"> <%= c.topicName %> </label>
-        <% end %>
-    </div>
+      <%= form_tag({:controller => 'posts', :action => 'selected'}, id: "selected-post")  %>
+        <%= label_tag "A.I"%>
+        <%= check_box_tag "A.I" %>
+        <%= label_tag "A.R"%>
+        <%= check_box_tag "A.R" %>
+        <%= label_tag "Quantum"%>
+        <%= check_box_tag "Quantum" %>
+        <input type="submit" value="Selected Posts" form="selected-post">
 
-    <div class="sideItem">
-        <div>Topics</div>
-      <table>
-        <tbody>
-          <% @topics.each do |topic| %>
-            <%= link_to topic do %>
-
-              <h3><%= topic.topicName %></h3>
-            <% end %>
-            <hr>
-          <% end %>
-
-        </tbody>
-        <%= link_to "Add A Topic", new_topic_path %>
-
-      </table>
     </div>
 
 
     <div class="sideItem">
       <div>LINKS</div>
-
       <table>
         <tbody>
           <tr>
