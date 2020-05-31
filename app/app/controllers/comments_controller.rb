@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
+    before_action :authenticate_user!
+
     def create 
         @post = Post.find(params[:post_id])
-        @comment = @post.comments.create(params[:comment].permit(:name, :body))
+
+        @comment = @post.comments.create(params[:comment].permit( :body))
+        @comment.name = @current_user.username
+        @comment.save
         @post.commentCount = @post.comments.count
         redirect_to post_path(@post)
     end

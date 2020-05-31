@@ -29,6 +29,25 @@
     <% end %>
   <% end %>
 </div>
+<h2>My Comments</h2>
+
+<% @posts =Post.all %>
+<% @posts.order('created_at desc').each do |post| %>
+  <% @comments =post.comments.where( :name => @user.username) %>
+  <% @comments.order('created_at desc').each do |comment| %>
+    <%= link_to post do %>
+
+      <div class="post-summary">
+        <strong><%= comment.name%></strong> <%= comment.body%>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<p>Engage With The Community With Comments</p>
+
+
+   
+
 
 
 

@@ -1,8 +1,5 @@
 <%= form_for([@post , @post.comments.build]) do |form| %>
-  <div class="field">
-         <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+
   <div class="field">
     <%= form.label :body %>
     <%= form.text_field :body %>
