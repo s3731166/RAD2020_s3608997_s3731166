@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <div class="nav-div">
+    <div class="card-button">
+      <%= link_to "Create A Post", new_post_path %>
+    </div>
+
+    <% if current_user %>
+      <div class="card-button">
+      <%= link_to "Log Out", logout_path %>
+      </div>
+
+      <div class ="right-icon">
+        <%=link_to current_user do%>
+        <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
+        <% end %>
+      </div>
+
+    <% else %>
+      <div class="right-icon">
+        <%= link_to  login_path  do %>
+        <img class ="gravatar" src="/logo-person-user-person-icon.jpg" alt="Log In" />
+      <% end %>
+      </div>
+    <% end %>
+    <h1>NEWS+ FORUM</h1>
+  </div>
+
+  <body>
+    <%= yield %>
+  </body>
+
+
+  <div id="footer">
+      <p> Copyright&copy; 2020 RMIT | Amandeep Janjua S3608997 | Jessiah Malik S3731166 | </p>  
+  </div>
+
+</html>

@@ -1,0 +1,63 @@
+<div id="sideBar">
+    <div class="sideItem">
+        <div>Users</div>
+
+        <table>
+        <tbody>
+            <% @users.each do |user| %>
+                <%= link_to user do %>
+                    <h3><%= user.username %></h3>
+                    <%= image_tag  user.gravatar_url, :class => "gravatar" %>
+                    <p> <%= user.phone %>. Created  <%= time_ago_in_words(user.created_at, include_seconds: true ) %> ago</p>
+                <% end %>
+                <hr>
+            <% end %>
+        </tbody>
+        </table>
+    </div>
+
+    <div id='topicfilter'>
+        <h4> Topic Filter: </h4>
+        <% @topicfilter = Topic.all %>
+        <% @topicfilter.each do |c| %>
+            <br>
+            <input id="<%= c %>" type="checkbox" class="topic-select" checked><label for="<%= c %>"> <%= c.topicName %> </label>
+        <% end %>
+    </div>
+
+    <div class="sideItem">
+        <div>Topics</div>
+      <table>
+        <tbody>
+          <% @topics.each do |topic| %>
+            <%= link_to topic do %>
+
+              <h3><%= topic.topicName %></h3>
+            <% end %>
+            <hr>
+          <% end %>
+
+        </tbody>
+        <%= link_to "Add A Topic", new_topic_path %>
+
+      </table>
+    </div>
+
+
+    <div class="sideItem">
+      <div>LINKS</div>
+
+      <table>
+        <tbody>
+          <tr>
+            <a href="https://rubyonrails.org/">RAILS</a>
+          </tr>
+            <hr>
+          <tr>
+            <a href="https://www.rmit.edu.au/">RMIT</a>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>

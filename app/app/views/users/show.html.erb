@@ -1,0 +1,60 @@
+
+<p id="notice"><%= notice %></p>
+<div class="show-user">
+<%= image_tag @user.gravatar_url, :class => "gravatar" %>
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @user.phone %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+ Joined  <%= time_ago_in_words(@user.created_at, include_seconds: true )  %> ago.
+
+<div>
+<% @posts =Post.where( :user_id => @user.id) %>
+  <% @posts.order('created_at desc').each do |post| %>
+
+    <%= link_to post do %>
+      <div class="post-summary">
+        <h3><%= post.name %></h3>
+        Created  <%= time_ago_in_words(post.created_at, include_seconds: true )  %> ago.
+        Views: <%= post.viewCount %> Comments: <%= post.commentCount %>. 
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<h2>My Comments</h2>
+
+<% @posts =Post.all %>
+<% @posts.order('created_at desc').each do |post| %>
+  <% @comments =post.comments.where( :name => @user.username) %>
+  <% @comments.order('created_at desc').each do |comment| %>
+    <%= link_to post do %>
+
+      <div class="post-summary">
+        <strong><%= comment.name%></strong> <%= comment.body%>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<p>Engage With The Community With Comments</p>
+
+
+   
+
+
+
+
+
+<% if @user.username == current_user.username %>
+  <%= link_to 'Edit', edit_user_path(@user) %> 
+<% end %>
+<%= link_to 'Back', root_path %>
+
+</div>

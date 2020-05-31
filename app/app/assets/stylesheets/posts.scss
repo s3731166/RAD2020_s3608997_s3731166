@@ -1,0 +1,47 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+body{
+   text-align: center;
+   display: inline-block;
+   
+}
+
+
+.post-backdrop{
+    // text-align: center;
+    background-color: #333;
+    padding: 2em;
+    // border-radius: 1em;
+    display: inline-block;
+    width: 300%;
+    margin: 40%;
+    margin-left: 80%;
+
+    text-align: left;
+
+}
+h5{
+    font-size: 0.7em;
+    text-align: right;
+    // display: inline;
+}
+.post-body{
+    text-align: left;
+    background-color: lightgray;
+    padding: 2em;
+    display: inline-block;
+    width: 80%;
+    height: 80%;
+    color: black;
+
+   
+    
+}
+.post-comments{
+    // text-align: center;
+    background-color: #333;
+    // border-radius: 1em;
+    display: inline-block;
+    width: 100%;
+}

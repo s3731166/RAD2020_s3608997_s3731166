@@ -1,0 +1,122 @@
+body {
+  font-family: sans-serif;
+  background: linear-gradient(to right, #be48a8, #86afdf);
+  // display:inline-block;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+
+.container{ 
+  margin-top: 20%;
+  display: table;
+  width: 100%;
+}
+
+
+
+.main-posts{
+  width: 250%;
+  display: table-cell; 
+  text-align: left;
+  float: left;
+  margin: 3em;
+  left: 0;
+  margin-top: 10em;
+  margin-bottom: 10em;
+}
+
+
+
+#postsDiv {
+  background-color: #191919;
+  padding: 1em;
+  position: relative;
+  width: 100%;
+  color: white;
+}
+
+#sideBar {
+  width: 30%;
+  height: auto;
+  color: hsl(0, 0%, 100%);
+  display: table-cell;
+  position: absolute;
+  right: 0;
+  margin-right: 2em;
+  margin-top: 10em;
+  margin-bottom: 10em;
+
+
+  background-color: #191919;
+}
+
+
+#wrapper {
+  //background-color: rgb(79, 210, 243);
+  background-color: #333;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.sideItem {
+  margin: 1em;
+  background-color:#333;
+  padding: 1em;
+  border-radius: 1em;
+}
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: black;
+  text-align: center;
+}
+
+.gravatar {
+  height: 50px;
+  width: auto;
+}
+
+
+#selectedPostsDiv {
+  display: inline-block;
+  background-color: darkcyan;
+  width: 60%;
+  padding: 1em;
+  border-radius: 1em;
+  display: none;
+
+
+}
+
+//INDEX POSTS LAYOUT
+.post-card {
+  // display: inline-block;
+  width: auto ;
+}
+.card-icon {
+  display: block;
+  align-content: right;
+}
+.card-content {
+  border-left: 2em;
+  display: block;
+//   width: inherit;
+}
+.card-info {
+  text-align: right;
+
+}
+
+.card-stats {
+  // display: inline-block;
+  text-align: right;
+margin-bottom: 2em;
+}
+//END INDEX posts-layout
+
+

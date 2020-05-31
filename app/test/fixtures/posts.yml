@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  body: MyText
+  commentCount: 1
+  viewCount: 1
+  author: MyString
+
+two:
+  name: MyString
+  body: MyText
+  commentCount: 1
+  viewCount: 1
+  author: MyString

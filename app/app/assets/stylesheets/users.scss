@@ -1,0 +1,50 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// FOR REGISTER
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #be48a8, #86afdf);
+    // text-align: center;
+    display: block;
+}
+
+body a {
+   
+}
+
+.boxRegister {
+    margin-left: 20%;
+    margin-top: 50%;
+    display: inline-block;
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: #191919;
+    // text-align: center;
+    transition: 0.25s;
+    // margin-top: 100px;
+    color: white;
+    border-radius: 2em;
+}
+.post-summary{
+    background-color: lightblue;
+    padding: 1em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    text-align: center;
+    // display: inline-block;
+}
+
+.show-user{
+background-color: #333;
+padding: 2em;
+//height: 50;
+//width: 50;
+margin-left: 20%;
+margin-top: 25%;
+}

@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<div class="post-backdrop">
+  <div class="post-body">
+
+  <p>
+    <strong><%= @post.name %></strong>
+  </p>
+  <p>
+    <%= @post.body %>
+  </p>
+</div>
+
+  <p>
+    <strong>Author:</strong>
+    <%= @post.author %>
+  </p>
+
+<div class="post-comments">
+
+  <p>
+    <%=  @post.comments.count %>
+    <strong>Comments:</strong>
+    <hr>
+
+    <%= render @post.comments %>
+    <h3>Add a comment: </h3>
+    <%= render 'comments/form' %>
+  </p>
+</div>
+  <p>
+    <strong>View Count:</strong>
+    <%= @post.viewCount %>
+  </p>
+
+
+  <%# only Poster Can Edit or Delete %>
+  <% if current_user %>
+    <% if @post.author == current_user.username %>
+    <%= link_to 'Edit', edit_post_path(@post) %> 
+    <%= link_to 'Delete', deletePost_path(@post) %>
+  <% end %>
+  <% end %>
+
+  <%= link_to 'Back', root_path %>
+</div>
+
+
